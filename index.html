@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Colaboradores</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #a7c9f6, #3a6ea5); /* Gradiente de azul claro para azul escuro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            position: relative; /* Para posicionar o botão LGPD no canto superior */
+        }
+
+        .container {
+            background: linear-gradient(to bottom, #a7c9f6, #3a6ea5); /* Gradiente de verde para branco */
+            padding: 20px;
+            border-radius: 8px;
+            border: 8px solid #246bb8; /* Borda verde */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Efeito 3D */
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: grid;
+            gap: 10px;
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #3a6ea5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #3a6ea5;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f1f1f1;
+        }
+
+        .image-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-left: 20px;
+        }
+
+        /* Estilo do botão LGPD */
+        .lgpd-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #6c95ca;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .lgpd-button:hover {
+            background-color: #3a6ea5;
+        }
+
+        /* Estilo do Modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5); 
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #a7c9f6;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            border: 8px solid #246bb8; /* Borda adicionada */
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            float: right;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-text {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Botão LGPD -->
+    <button class="lgpd-button" id="lgpd-btn">LGPD</button>
+
+    <!-- Modal -->
+    <div id="lgpd-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <h2>O que é a LGPD?</h2>
+            <p class="modal-text">
+                A Lei Geral de Proteção de Dados (LGPD) é uma legislação brasileira criada para proteger os dados pessoais dos cidadãos. 
+                Ela estabelece regras sobre a coleta, armazenamento, tratamento e compartilhamento de informações pessoais, 
+                garantindo maior controle e transparência sobre como as empresas utilizam esses dados. A LGPD se aplica a todas as organizações que processam dados pessoais de pessoas no Brasil, 
+                seja online ou offline, com o objetivo de garantir mais segurança e privacidade para os indivíduos.
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Cadastro de Colaboradores</h1>
+
+        <form id="form-colaborador">
+            <label for="id">ID:</label>
+            <input type="number" id="id" name="id" required>
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" name="sexo" required>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+            </select>
+
+            <label for="funcao">Função:</label>
+            <select id="funcao" name="funcao" required>
+                <option value="Mecânico(a)">Mecânico(a)</option>
+                <option value="Técnico de TI">Técnico de TI</option>
+                <option value="Eletricista">Eletricista</option>
+                <option value="Administração">Administração</option>
+                <option value="Técnico de Segurança">Técnico de Segurança</option>
+                <option value="Logística">Logística</option>
+                <option value="Soldador(a)">Soldador(a)</option>
+                <option value="Engenheiro(a)">Engenheiro(a)</option>
+            </select>
+
+            <label for="salario">Salário:</label>
+            <input type="number" id="salario" name="salario" required>
+
+            <label for="data-admissao">Data de Admissão:</label>
+            <input type="date" id="data-admissao" name="data-admissao" required>
+
+            <label for="tempo-contrato">Tempo de Contrato (anos):</label>
+            <input type="number" id="tempo-contrato" name="tempo-contrato" required>
+
+            <button type="submit">Adicionar Colaborador</button>
+        </form>
+
+        <div class="image-container">
+            <img id="foto-colaborador" src="" alt="Foto do colaborador" style="display: none;">
+        </div>
+
+        <h2>Lista de Colaboradores</h2>
+        <table id="tabela-colaboradores">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Função</th>
+                    <th>Salário</th>
+                    <th>Data de Admissão</th>
+                    <th>Tempo de Contrato</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os colaboradores serão adicionados aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Script para abrir e fechar o modal LGPD
+        const lgpdBtn = document.getElementById('lgpd-btn');
+        const modal = document.getElementById('lgpd-modal');
+        const closeModal = document.getElementById('close-modal');
+
+        lgpdBtn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        closeModal.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Função para salvar os colaboradores no localStorage
+        function saveColaboradores(colaboradores) {
+            localStorage.setItem("colaboradores", JSON.stringify(colaboradores));
+        }
+
+        // Função para carregar os colaboradores do localStorage
+        function loadColaboradores() {
+            const colaboradores = JSON.parse(localStorage.getItem("colaboradores"));
+            return colaboradores ? colaboradores : [];
+        }
+
+        // Script para adicionar colaborador
+        document.getElementById("form-colaborador").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const id = document.getElementById("id").value;
+            const nome = document.getElementById("nome").value;
+            const sexo = document.getElementById("sexo").value;
+            const funcao = document.getElementById("funcao").value;
+            const salario = document.getElementById("salario").value;
+            const dataAdmissao = document.getElementById("data-admissao").value;
+            const tempoContrato = document.getElementById("tempo-contrato").value;
+
+            let fotoSrc = '';
+            if (sexo === 'masculino') {
+                fotoSrc = 'https://thumbs.dreamstime.com/b/homem-de-sorriso-com-%C3%ADcone-liso-do-estilo-da-barba-car%C3%A1ter-masculino-cara-do-homem-79849338.jpg';
+            } else {
+                fotoSrc = 'https://static.vecteezy.com/system/resources/previews/009/384/770/non_2x/woman-face-expression-clipart-design-illustration-free-png.png';
+            }
+
+            const fotoColaborador = document.getElementById('foto-colaborador');
+            fotoColaborador.src = fotoSrc;
+            fotoColaborador.style.display = 'block';
+
+            const tabela = document.getElementById("tabela-colaboradores").getElementsByTagName("tbody")[0];
+            const novaLinha = tabela.insertRow();
+
+            novaLinha.insertCell(0).textContent = id;
+            novaLinha.insertCell(1).textContent = nome;
+            novaLinha.insertCell(2).textContent = funcao;
+            novaLinha.insertCell(3).textContent = `R$ ${parseFloat(salario).toFixed(2)}`;
+            novaLinha.insertCell(4).textContent = dataAdmissao;
+            novaLinha.insertCell(5).textContent = `${tempoContrato} ano(s)`;
+
+            // Salvar no localStorage
+            const colaboradores = loadColaboradores();
+            colaboradores.push({ id, nome, sexo, funcao, salario, dataAdmissao, tempoContrato });
+            saveColaboradores(colaboradores);
+
+            document.getElementById("form-colaborador").reset();
+        });
+
+        // Carregar colaboradores ao carregar a página
+        window.onload = function() {
+            const colaboradores = loadColaboradores();
+            const tabela = document.getElementById("tabela-colaboradores").getElementsByTagName("tbody")[0];
+            colaboradores.forEach(colaborador => {
+                const novaLinha = tabela.insertRow();
+                novaLinha.insertCell(0).textContent = colaborador.id;
+                novaLinha.insertCell(1).textContent = colaborador.nome;
+                novaLinha.insertCell(2).textContent = colaborador.funcao;
+                novaLinha.insertCell(3).textContent = `R$ ${parseFloat(colaborador.salario).toFixed(2)}`;
+                novaLinha.insertCell(4).textContent = colaborador.dataAdmissao;
+                novaLinha.insertCell(5).textContent = `${colaborador.tempoContrato} ano(s)`;
+            });
+        };
+    </script>
+</body>
+</html>
